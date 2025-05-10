@@ -1,0 +1,48 @@
+<app-navigation></app-navigation>
+<span class="room-container">
+    <span *ngFor="let application of applications"  class="application">
+        <button class="show-characteristics-btn" (click)="openCharacteristicsModal()">
+            Характеристики
+        </button>
+
+        <app-room
+
+          [roomData]="application.room"
+          typeRoom="room"
+          (applicationAction)="handleApplicationAction($event)"
+        ></app-room>
+    </span>
+
+  <!-- Модальное окно (появляется при открытии) -->
+    <div class="characteristics-modal" *ngIf="isCharacteristicsModalOpen">
+        <div class="modal-content">
+            <button class="close-modal-btn" (click)="closeCharacteristicsModal()">×</button>
+            <h2>Характеристики пользователя</h2>
+
+            <div class="field">
+                <label>Имя и фамилия:</label>
+                <p>{{ applications[currentId].account.name || 'Не указано' }}</p>
+            </div>
+
+            <div class="field">
+                <label>Пол:</label>
+                <p>{{ applications[currentId].account.gender || 'Не указано' }}</p>
+            </div>
+
+            <div class="field">
+                <label>Курс:</label>
+                <p>{{ applications[currentId].account.course || 'Не указан' }}</p>
+            </div>
+
+            <div class="field">
+                <label>Факультет:</label>
+                <p>{{ applications[currentId].account.faculty || 'Не указан' }}</p>
+            </div>
+
+            <div class="field">
+                <label>О себе:</label>
+                <p>{{ applications[currentId].account.about || 'Не указано' }}</p>
+            </div>
+        </div>
+    </div>
+</span>

@@ -1,0 +1,57 @@
+<span class="room">
+    <div class="room-image-container">
+      <img [src]="roomData.imageUrl" alt="Фото комнаты">
+      <button
+        class="toggle-info-btn"
+        (click)="toggleRoomInfo(roomData)"
+      >
+        <img
+          src="/assets/images/arrowIcon.svg"
+          alt="Переключить информацию"
+          [class.rotated]="roomData.showAdditional"
+        >
+      </button>
+    </div>
+    <div class="room-information">
+      <div class="additional-information" *ngIf="roomData.showAdditional">
+        <h3 class="floor">{{roomData.floor}} этаж</h3>
+        <div class="applications">
+          <button
+            *ngFor="let application of roomData.applications"
+            class="application-btn"
+            (click)="copyToClipboard(application.tg)"
+          >
+            {{application.name}}
+          </button>
+        </div>
+      </div>
+      <div class="description-room" *ngIf="!roomData.showAdditional">
+        <h3 class="room-name">{{roomData.name}}</h3>
+        <p class="room-description">{{roomData.description}}</p>
+        <div class="people-count">{{roomData.peopleCurrent}}/{{roomData.peopleMax}}</div>
+      </div>
+    </div>
+    <div class="action-buttons">
+      <button *ngIf="typeRoom !== 'application'" class="apply-btn" (click)="applyForRoom()">
+        Подать заявку
+      </button>
+      <div *ngIf="typeRoom === 'application'" class="application-status">
+        <div *ngIf="roomData.applicationStatus === 'pending'" class="status-pending">
+          В обработке
+        </div>
+        <div *ngIf="roomData.applicationStatus === 'rejected'" style="cursor:pointer;" class="status-rejected" (click)="viewRejectionReason()">
+          Отклонено
+        </div>
+        <div *ngIf="roomData.applicationStatus === 'approved'" class="status-approved">
+          Принято
+        </div>
+        <!-- <button *ngIf="roomData.applicationStatus === 'pending'"  class="cancel-btn" (click)="cancelApplication()">
+          Отменить заявку
+        </button> -->
+      </div>
+      <div *ngIf="typeRoom === 'admin'" class="admin-buttons">
+        <button class="approve-btn" (click)="approveRoom()">Одобрить</button>
+        <button class="reject-btn" (click)="rejectRoom()">Отклонить</button>
+      </div>
+    </div>
+  </span>

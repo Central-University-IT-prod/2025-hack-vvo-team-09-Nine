@@ -1,0 +1,34 @@
+<span class="navigationPanel">
+    <div class="logoTitle">
+        <a routerLink="/">STUDOM</a>
+        <button [class.active]="mobileMenuActive" class="mobileMenuBtn" (click)="toggleMobileMenu()">
+            <img src="/assets/images/menuIcon.svg" alt="Menu">
+        </button>
+    </div>
+
+    <span class="finder" [class.active]="mobileMenuActive">
+        <button (click)="find()">
+            <img src="/assets/images/loupeIcon.svg" alt="find">
+        </button>
+        <input [(ngModel)]="inputValue" placeholder="Введите теги через пробел" type="text">
+    </span>
+
+    <span class="pages" [class.active]="mobileMenuActive">
+        <a routerLink="/">
+            <img src="/assets/images/bedIcon.svg" alt="Rooms">
+            <h3 [class.active]="mobileMenuActive" >Комнаты</h3>
+        </a>
+        <a routerLink="/account">
+            <img src="/assets/images/accountIcon.svg" alt="Account">
+            <h3 [class.active]="mobileMenuActive" >Аккаунт</h3>
+        </a>
+        <a *ngIf="getAccType()==='student'" routerLink="/room">
+            <img src="/assets/images/homeIcon.svg" alt="My Room">
+            <h3 [class.active]="mobileMenuActive" >Моя комната</h3>
+        </a>
+        <a *ngIf="getAccType()==='admin'" routerLink="/stats">
+            <img src="/assets/images/statsIcon.svg" alt="Statistics">
+            <h3 [class.active]="mobileMenuActive">Статистика</h3>
+        </a>
+    </span>
+</span>

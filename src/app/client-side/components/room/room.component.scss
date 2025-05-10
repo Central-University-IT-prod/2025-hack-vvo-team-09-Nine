@@ -1,0 +1,344 @@
+/* Основные настройки */
+
+:host {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Стили отдельной карточки комнаты */
+.room {
+  background: #1e1e1e;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  max-width: 350px;
+  width:100%;
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(255, 255, 255, 0.1);
+  }
+}
+
+.room-image-container {
+  position: relative;
+  width: 100%;
+  height: 200px;
+}
+
+.room img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.toggle-info-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  background: none;
+  border: none;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+
+  &:hover {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  img {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+    filter: invert(1);
+
+    &.rotated {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+/* Блок с информацией */
+.room-information {
+  padding: 16px;
+  background: #1a1a1a;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Основная информация */
+.description-room {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-grow: 1;
+
+  .room-name {
+    font-family: 'Russo One', sans-serif;
+    font-size: 1.4rem;
+    margin: 0;
+    color: #fff;
+    letter-spacing: 0.5px;
+  }
+
+  .room-description {
+    font-size: 0.9rem;
+    margin: 0;
+    color: #b0b0b0;
+    line-height: 1.5;
+    flex-grow: 1;
+  }
+
+  .people-count {
+    font-family: 'Russo One', sans-serif;
+    color: #fff;
+    font-size: 1.1rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 6px 12px;
+    border-radius: 20px;
+    display: inline-block;
+    align-self: flex-start;
+    margin-top: 8px;
+  }
+}
+
+/* Дополнительная информация */
+.additional-information {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+
+  .floor {
+    font-family: 'Russo One', sans-serif;
+    font-size: 1.4rem;
+    margin: 0;
+    color: #fff;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #333;
+  }
+
+  .applications {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-grow: 1;
+  }
+
+  .application-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    &::before {
+      content: "✉️";
+      font-size: 0.9rem;
+    }
+  }
+}
+
+/* Кнопка подачи заявки */
+.apply-btn {
+  width: 100%;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-family: 'Russo One', sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: auto;
+
+  &:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .room-container {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .room-image-container {
+    height: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  :host {
+    padding: 15px;
+  }
+
+  .room-container {
+    grid-template-columns: 1fr;
+  }
+}
+.action-buttons {
+  width: 100%;
+}
+
+.application-status {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+  }
+}
+
+.status-pending {
+  color: #FFC107;
+  background: rgba(255, 193, 7, 0.1);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.status-rejected {
+  color: #F44336;
+  background: rgba(244, 67, 54, 0.1);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.status-approved {
+  color: #4CAF50;
+  background: rgba(76, 175, 80, 0.1);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.view-reason-btn, .cancel-btn {
+  background: none;
+  border: 1px solid currentColor;
+  color: inherit;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.cancel-btn {
+  width: 100%;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(244, 67, 54, 0.2);
+    color: #F44336;
+    border-color: #F44336;
+  }
+}
+.action-buttons {
+  width: 100%;
+}
+
+.application-status {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+  }
+}
+
+.status-pending {
+  color: #FFC107;
+  background: rgba(255, 193, 7, 0.1);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.status-rejected {
+  color: #F44336;
+  background: rgba(244, 67, 54, 0.1);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.status-approved {
+  color: #4CAF50;
+  background: rgba(76, 175, 80, 0.1);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.view-reason-btn, .cancel-btn {
+  background: none;
+  border: 1px solid currentColor;
+  color: inherit;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.cancel-btn {
+  width: 100%;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(244, 67, 54, 0.2);
+    color: #F44336;
+    border-color: #F44336;
+  }
+}

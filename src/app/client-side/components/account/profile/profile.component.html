@@ -1,0 +1,87 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="profile-form">
+  <div class="form-row">
+    <div class="form-group">
+      <label for="name">Имя Фамилия</label>
+      <input
+        id="name"
+        type="text"
+        formControlName="name"
+        [class.invalid]="profileForm.get('name')?.invalid && profileForm.get('name')?.touched"
+      >
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="tg">Телеграм</label>
+    <input
+      id="tg"
+      type="text"
+      formControlName="tg"
+      placeholder="@username"
+    >
+  </div>
+  <div class="form-group">
+    <label for="about">О себе</label>
+    <textarea
+      id="about"
+      type="text"
+      formControlName="about"
+      placeholder="Люблю рисовать и кататься на скейтборде"
+    ></textarea>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label for="faculty">Факультет</label>
+      <select
+        id="faculty"
+        formControlName="faculty"
+        [class.invalid]="profileForm.get('faculty')?.invalid && profileForm.get('faculty')?.touched"
+      >
+        <option value="" disabled selected>Выберите факультет</option>
+        <option *ngFor="let faculty of faculties" [value]="faculty">{{ faculty }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="course">Курс</label>
+      <select
+        id="course"
+        formControlName="course"
+        [class.invalid]="profileForm.get('course')?.invalid && profileForm.get('course')?.touched"
+      >
+        <option value="" disabled selected>Выберите курс</option>
+        <option *ngFor="let course of courses" [value]="course">{{ course }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Пол</label>
+      <div class="radio-group">
+        <label>
+          <input
+            type="radio"
+            formControlName="gender"
+            value="male"
+          >
+          Male
+        </label>
+        <label>
+          <input
+            type="radio"
+            formControlName="gender"
+            value="female"
+          >
+          Female
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <button
+    type="submit"
+    class="submit-btn"
+    [disabled]="profileForm.invalid"
+  >
+    Сохранить изменения
+  </button>
+</form>

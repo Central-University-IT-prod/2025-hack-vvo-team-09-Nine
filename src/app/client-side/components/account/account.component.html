@@ -1,0 +1,30 @@
+<app-navigation></app-navigation>
+<div class="account-container">
+
+  <div class="account-tabs">
+    <button
+      [class.active]="activeTab === 'profile'"
+      (click)="activeTab = 'profile'"
+    >
+      Профиль
+    </button>
+    <button
+      [class.active]="activeTab === 'documents'"
+      (click)="activeTab = 'documents'"
+    >
+      Документы
+    </button>
+    <button
+      [class.active]="activeTab === 'applications'"
+      (click)="activeTab = 'applications'"
+    >
+      Заявки
+    </button>
+  </div>
+
+  <div class="tab-content">
+    <app-profile *ngIf="activeTab === 'profile'"></app-profile>
+    <app-document *ngIf="activeTab === 'documents'"></app-document>
+    <app-applications *ngIf="activeTab === 'applications'"></app-applications>
+  </div>
+</div>

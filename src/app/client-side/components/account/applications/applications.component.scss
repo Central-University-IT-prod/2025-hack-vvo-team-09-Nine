@@ -1,0 +1,9 @@
+.room-container{
+  width:100%;
+  display:flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+app-room{
+  width: clamp(300px, 40%, 400px);
+}

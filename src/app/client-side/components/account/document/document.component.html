@@ -1,0 +1,33 @@
+<h2>Студенческий билет</h2>
+
+<div class="upload-area" [class.has-file]="previewUrl">
+  <input
+    type="file"
+    id="studentCard"
+    accept="image/*,.pdf"
+    (change)="onFileSelected($event)"
+  >
+
+  <label for="studentCard" class="upload-label">
+    <ng-container *ngIf="!previewUrl; else preview">
+      <img src="/assets/images/upload-icon.svg" alt="Upload" class="upload-icon">
+      <p>Перетащите файл сюда или нажмите для выбора</p>
+      <small>Поддерживаются JPG, PNG или PDF</small>
+    </ng-container>
+
+    <ng-template #preview>
+      <img *ngIf="previewUrl" [src]="previewUrl" alt="Preview" class="preview-image">
+      <button class="change-file" (click)="studentCardFile = null; previewUrl = null">
+        Изменить файл
+      </button>
+    </ng-template>
+  </label>
+</div>
+
+<button
+  class="upload-btn"
+  (click)="uploadDocument()"
+  [disabled]="!studentCardFile"
+>
+  Загрузить документ
+</button>

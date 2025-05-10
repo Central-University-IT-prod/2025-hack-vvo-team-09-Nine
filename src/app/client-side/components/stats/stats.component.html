@@ -1,0 +1,40 @@
+<app-navigation></app-navigation>
+<div class="stats-container">
+  <div class="stats-grid">
+    <!-- Круговая диаграмма -->
+    <div class="stat-card">
+      <h2>Заселенность комнат</h2>
+      <div class="chart-container">
+        <canvas id="occupancyChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Столбчатая диаграмма -->
+    <div class="stat-card occupansySpan">
+      <h2>Топ-10 комнат по заявкам</h2>
+      <div class="chart-container occupansyDiv">
+        <canvas id="applicationsChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Дополнительная статистика -->
+    <div class="stats-summary">
+      <div class="stat-item">
+        <span class="stat-value">{{ totalRooms }}</span>
+        <span class="stat-label">Всего комнат</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">{{ occupiedRooms }}</span>
+        <span class="stat-label">Заселено</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">{{ totalApplications }}</span>
+        <span class="stat-label">Всего заявок</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">{{ avgApplications }}</span>
+        <span class="stat-label">Среднее на комнату</span>
+      </div>
+    </div>
+  </div>
+</div>

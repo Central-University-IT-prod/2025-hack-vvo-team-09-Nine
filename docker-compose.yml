@@ -1,0 +1,10 @@
+services:
+  frontend:
+    build: .
+    ports:
+      - "80:80"
+
+  backend:
+    build: ./backend       # Сборка из папки backend/
+    ports:
+      - "5000:5000"

@@ -1,0 +1,47 @@
+<app-navigation></app-navigation>
+<div class="add-room-container">
+  <h2>Добавление комнаты</h2>
+
+  <form [formGroup]="roomForm" (ngSubmit)="submitRoom()" class="room-form">
+    <div class="form-group">
+      <label for="roomName">Номер комнаты*</label>
+      <input type="text" id="roomName" formControlName="name">
+      <div class="error" *ngIf="roomForm.get('number')?.invalid && roomForm.get('number')?.touched">
+        Обязательное поле
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="floor">Этаж*</label>
+      <input type="number" id="floor" formControlName="floor">
+      <div class="error" *ngIf="roomForm.get('floor')?.invalid && roomForm.get('floor')?.touched">
+        Обязательное поле
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="capacity">Вместимость*</label>
+      <input type="number" id="capacity" formControlName="capacity">
+      <div class="error" *ngIf="roomForm.get('capacity')?.invalid && roomForm.get('capacity')?.touched">
+        Обязательное поле
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="tags">Теги*</label>
+      <input type="text" id="tags" formControlName="tags">
+      <div class="error" *ngIf="roomForm.get('capacity')?.invalid && roomForm.get('capacity')?.touched">
+        Обязательное поле
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Описание</label>
+      <textarea id="description" formControlName="description"></textarea>
+    </div>
+
+    <button type="submit" class="submit-btn" [disabled]="roomForm.invalid">
+      Добавить комнату
+    </button>
+  </form>
+</div>

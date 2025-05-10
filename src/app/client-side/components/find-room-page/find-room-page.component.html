@@ -1,0 +1,12 @@
+<app-navigation (tagsEmitter)="addRequestTags($event)"></app-navigation>
+<span class="body">
+    <span class="tags">
+        <button (click)="removeTag(index)" *ngFor="let tag of tags;let index=index" class="tag">
+            <img src="/assets/images/closeIcon.svg" alt="close" srcset="">
+            <h3>{{tag}}</h3>
+        </button>
+    </span>
+    <span class="room-container">
+        <app-room (applicationAction)="handleApplicationAction($event)" *ngFor="let room of rooms" [roomData]="room" typeRoom="room"></app-room>
+    </span>
+</span>

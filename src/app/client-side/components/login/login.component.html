@@ -1,0 +1,124 @@
+<app-navigation></app-navigation>
+<div class="register-container">
+  <div class="register-card" @fade>
+    <h1>{{ isRegisterMode ? 'Регистрация' : 'Вход' }}</h1>
+
+    <form
+      *ngIf="isRegisterMode; else loginFormTpl"
+      [formGroup]="registerForm"
+      (ngSubmit)="onSubmit()"
+      @fade
+    >
+      <!-- Форма регистрации -->
+      <div class="form-group">
+        <label for="userType">Тип пользователя</label>
+        <div class="radio-group">
+          <label *ngFor="let type of userTypes">
+            <input type="radio" formControlName="accountType" [value]="type.value">
+            {{ type.display }}
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="Введите ваш email"
+          [class.invalid]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
+        >
+        <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="error-message">
+          <span *ngIf="registerForm.get('email')?.errors?.['required']">Email обязателен</span>
+          <span *ngIf="registerForm.get('email')?.errors?.['email']">Введите корректный email</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Пароль</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="Придумайте пароль"
+          [class.invalid]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
+        >
+        <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="error-message">
+          <span *ngIf="registerForm.get('password')?.errors?.['required']">Пароль обязателен</span>
+          <span *ngIf="registerForm.get('password')?.errors?.['minlength']">
+              Минимум {{ registerForm.get('password')?.errors?.['minlength']?.requiredLength }} символов
+            </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Подтвердите пароль</label>
+        <input
+          id="confirmPassword"
+          type="password"
+          formControlName="confirmPassword"
+          placeholder="Повторите пароль"
+          [class.invalid]="registerForm.hasError('mismatch') && registerForm.get('confirmPassword')?.touched"
+        >
+        <div *ngIf="registerForm.hasError('mismatch') && registerForm.get('confirmPassword')?.touched" class="error-message">
+          Пароли не совпадают
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn" [disabled]="registerForm.invalid || isLoading">
+        <span *ngIf="!isLoading">Зарегистрироваться</span>
+        <span *ngIf="isLoading" class="loader"></span>
+      </button>
+    </form>
+
+    <ng-template #loginFormTpl>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <!-- Форма входа -->
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input
+            id="loginEmail"
+            type="email"
+            formControlName="email"
+            placeholder="Введите ваш email"
+            [class.invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+          >
+          <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="error-message">
+            <span *ngIf="loginForm.get('email')?.errors?.['required']">Email обязателен</span>
+            <span *ngIf="loginForm.get('email')?.errors?.['email']">Введите корректный email</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="loginPassword">Пароль</label>
+          <input
+            id="loginPassword"
+            type="password"
+            formControlName="password"
+            placeholder="Введите пароль"
+            [class.invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+          >
+          <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error-message">
+            Пароль обязателен
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn" [disabled]="loginForm.invalid || isLoading">
+          <span *ngIf="!isLoading">Войти</span>
+          <span *ngIf="isLoading" class="loader"></span>
+        </button>
+      </form>
+    </ng-template>
+
+    <div class="login-link">
+        <span>
+          {{ isRegisterMode ? 'Уже есть аккаунт?' : 'Нет аккаунта?' }}
+          <a (click)="toggleMode()" style="cursor: pointer;">
+            {{ isRegisterMode ? 'Войти' : 'Зарегистрироваться' }}
+          </a>
+        </span>
+    </div>
+  </div>
+</div>
+

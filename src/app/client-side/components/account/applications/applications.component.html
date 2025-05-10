@@ -1,0 +1,3 @@
+<span class="room-container">
+    <app-room (applicationAction)="handleApplicationAction($event)" *ngFor="let room of rooms" [roomData]="room" typeRoom="application"></app-room>
+</span>
